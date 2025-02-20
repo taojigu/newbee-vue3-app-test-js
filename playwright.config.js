@@ -7,7 +7,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 import dotenv from 'dotenv';
 const environment = process.env.ENV || 'test';
-dotenv.config({ path: `.env.${environment}` });
+dotenv.config({ path: `./env/.env.${environment}` });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -25,10 +25,11 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  globalSetup: './config/global-setup.js',
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.BASE_URL,
-    
+    storageState: 'storageState.json',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
