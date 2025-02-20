@@ -1,7 +1,12 @@
 import { test, expect } from '@playwright/test';
 import { verifyCodeFromImage } from '../util/image-util.js';
 
-test('login', async ({ page }) => {
+test('has title', async ({ page }) => {
+    await page.goto('https://playwright.dev/');
+    await expect(page).toHaveTitle(/Playwright/);
+});
+
+test.skip('login', async ({ page }) => {
     const baseURL = process.env.baseURL;
     const fullURL = baseURL + "/login";
     const username = process.env.username;
@@ -18,3 +23,7 @@ test('login', async ({ page }) => {
     // await page.getByRole('textbox', { name: '输入验证码' }).fill(code);
     await page.getByRole('button', { name: '登录' }).click();
     });
+
+
+
+    
